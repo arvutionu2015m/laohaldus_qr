@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}QR-koodi skaneerimine{% endblock %}
+{% block content %}
+<h2>QR-koodi skaneerimine</h2>
+<div id="reader" style="width: 400px;"></div>
+<p><strong>Skaneeritud kood:</strong> <span id="qr-result"></span></p>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+    function onScanSuccess(decodedText, decodedResult) {
+        document.getElementById('qr-result').textContent = decodedText;
+        fetch(`/api/skaneeri_qr/${decodedText}/`, {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data => alert("Toode leitud: " + data.toode))
+        .catch(error => alert("QR-kood ei kehti"));
+    }
+
+    let html5QrCode = new Html5Qrcode("reader");
+    html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 }, onScanSuccess);
+</script>
+{% endblock %}

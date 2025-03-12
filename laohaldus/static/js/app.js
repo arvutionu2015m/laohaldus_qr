@@ -1,0 +1,1 @@
+console.log("Laohaldussüsteem töötab!");

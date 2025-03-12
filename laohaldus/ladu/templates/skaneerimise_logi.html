@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Skaneerimise logi{% endblock %}
+{% block content %}
+<h2>Teie skaneerimiste ajalugu</h2>
+
+<div class="mb-3">
+  <a href="{% url 'eksport_csv' %}" class="btn btn-success">📄 Ekspordi CSV</a>
+  <a href="{% url 'eksport_pdf' %}" class="btn btn-danger">📄 Ekspordi PDF</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Toode</th>
+            <th>QR-kood</th>
+            <th>Skaneeritud aeg</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logid %}
+        <tr>
+            <td>{{ log.toode.nimi }}</td>
+            <td>{{ log.qr_kood }}</td>
+            <td>{{ log.skaneeritud_aeg }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

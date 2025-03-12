@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Toodete nimekiri{% endblock %}
+{% block content %}
+<h2>Laos olevad tooted</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pilt</th>
+            <th>Toode</th>
+            <th>Partii</th>
+            <th>Kogus</th>
+            <th>Aegumiskuupäev</th>
+            <th>QR-kood</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for toode in tooted %}
+        <tr>
+            <td>
+                {% if toode.pilt %}
+                    <img src="{{ toode.pilt.url }}" width="80">
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td>{{ toode.nimi }}</td>
+            <td>{{ toode.partii_number }}</td>
+            <td>{{ toode.kogus }}</td>
+            <td>{{ toode.aegumiskuupaev }}</td>
+            <td>
+                <img src="{{ toode.qr_kood.url }}" width="80">
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
